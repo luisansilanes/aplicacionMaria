@@ -31,11 +31,11 @@ namespace CapaDatos
                 try
                 {
                     conexion.Open();
-                    string sqlInsertUsuario = "INSERT INTO usuario (Password,Nombre,Foto) VALUES(?,?,?)";
+                    string sqlInsertUsuario = "INSERT INTO usuario (Password,Nombre,Foto) VALUES(@Password,@Nombre,@Foto)";
                     MySqlCommand cmdInsertUsuario = new MySqlCommand(sqlInsertUsuario,conexion);
-                    cmdInsertUsuario.Parameters.AddWithValue("Password", usuario.Password);
-                    cmdInsertUsuario.Parameters.AddWithValue("Nombre", usuario.Nombre);
-                    cmdInsertUsuario.Parameters.AddWithValue("Foto", usuario.Foto);
+                    cmdInsertUsuario.Parameters.AddWithValue("@Password", usuario.Password);
+                    cmdInsertUsuario.Parameters.AddWithValue("@Nombre", usuario.Nombre);
+                    cmdInsertUsuario.Parameters.AddWithValue("@Foto", usuario.Foto);
                     int resultado = cmdInsertUsuario.ExecuteNonQuery();
                     if (resultado == 0) return "No se ha podido insertar el usuario";
                 } catch(Exception e)
@@ -47,23 +47,91 @@ namespace CapaDatos
         }
 
         /// <summary>
-        /// Método que recibe un usuario a Borrar. Si sale bien devuelve un String "vacio". Si no, devolverá un mensaje de error.
+        /// Método que recibe un idUsuario del usuario a Borrar. Si sale bien devuelve un String "vacio". Si no, devolverá un mensaje de error.
         /// </summary>
-        /// <param name="usuario"></param>
+        /// <param name="idUsuario"></param>
         /// <returns></returns>
-        public String BorrarUsuario(Usuario usuario)
+        public String BorrarUsuario(int idUsuario)
         {
             MySqlConnectionStringBuilder builder = this.StringConexion();
             using (MySqlConnection conexion = new MySqlConnection(builder.ToString()))
             {
-                string sqlBorrar = "DELETE FROM usuario WHERE Nombre=?";
-                MySqlCommand cmdBorrar = new MySqlCommand(sqlBorrar, conexion);
-                int resultado = cmdBorrar.ExecuteNonQuery();
-                if (resultado == 0) return "No se ha podido borrar el usuario";
+                try {
+                    string sqlBorrar = "DELETE FROM usuario WHERE idUsuario=@idUsuario";
+                    MySqlCommand cmdBorrar = new MySqlCommand(sqlBorrar, conexion);
+                    cmdBorrar.Parameters.AddWithValue("@idUsuario",idUsuario);
+                    int resultado = cmdBorrar.ExecuteNonQuery();
+                    if (resultado == 0) return "No se ha podido borrar el usuario";
+                }
+                catch(Exception e)
+                {
+                    this.guardarMensajeError(e);
+                }
             }
                 return "";
         }
+        /// <summary>
+        /// Recibe el idUsuario del usuario a modificar, el nuevoNombre. Si sale bien devuelve un String "vacio". Si no, devolverá un mensaje de error.
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="nuevoNombre"></param>
+        /// <returns></returns>
+        public String ActualizarNombreUsuario(int idUsuario,string nuevoNombre)
+        {
+            MySqlConnectionStringBuilder builder = this.StringConexion();
+            using (MySqlConnection conexion = new MySqlConnection(builder.ToString()))
+            {
+                try {
+                    string sqlActualizar = "UPDATE usuario SET Nombre=@Nombre WHERE idUsuario=@idUsuario";
+                    MySqlCommand cmdActualizar = new MySqlCommand(sqlActualizar, conexion);
+                    cmdActualizar.Parameters.AddWithValue("@Nombre", nuevoNombre);
+                    cmdActualizar.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    int resultado = cmdActualizar.ExecuteNonQuery();
+                    if (resultado == 0) return "No se ha podido actualizar el nombre del usuario";
+                } catch (Exception e)
+                {
+                    this.guardarMensajeError(e);
+                }
+            }
+            return "";
+        }
+        public String ActualizarFotoUsuario(int idUsuario,string nuevaFoto)
+        {
+            //AHORA QUE ME VIENE A LA CABEZA, PREGUNTAR DONDE LECHES ESTARÁN LAS FOTOS. Y SI TENEMOS QUE GUARDAR EN EL CAMPO FOTO LA RUTA ENTERA
+            MySqlConnectionStringBuilder builder = this.StringConexion();
+            using (MySqlConnection conexion = new MySqlConnection(builder.ToString()))
+            {
+                try
+                {
+                    string sqlActualizar = "UPDATE usuario SET Foto=@Foto WHERE idUsuario=@idUsuario";
+                    MySqlCommand cmdActualizar = new MySqlCommand(sqlActualizar, conexion);
+                    cmdActualizar.Parameters.AddWithValue("@Foto", nuevaFoto);
+                    cmdActualizar.Parameters.AddWithValue("@idUsuario", idUsuario);
+                    int resultado = cmdActualizar.ExecuteNonQuery();
+                    if (resultado == 0) return "No se ha podido actualizar la foto del usuario";
+                }
+                catch (Exception e)
+                {
+                    this.guardarMensajeError(e);
+                }
+            }
+            return "";
+        }
 
+        //PREGUNTAR SI ESTO SOLO LO HACE EL ADMIN BUENO ESTO Y CASI TODOS LOS METODOS DE ESTE GESTOR
+        public String CambiarContrasena(int idUsuario,String nuevaContrasena)
+        {
+            MySqlConnectionStringBuilder builder = this.StringConexion();
+            using (MySqlConnection conexion = new MySqlConnection(builder.ToString()))
+            {
+                string sqlContrasena = "UPDATE usuario SET Password=@Password WHERE idUsuario=@idUsuario";
+                MySqlCommand cmdContrasena = new MySqlCommand(sqlContrasena, conexion);
+                cmdContrasena.Parameters.AddWithValue("@Password", nuevaContrasena);
+                cmdContrasena.Parameters.AddWithValue("@idUsuario", idUsuario);
+            }
+
+                return "";
+        }
         public List<Usuario> ListaUsuarios()
         {
             MySqlConnectionStringBuilder builder = this.StringConexion();

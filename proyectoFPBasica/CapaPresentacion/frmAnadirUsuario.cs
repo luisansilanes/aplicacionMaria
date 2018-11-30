@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace CapaPresentacion
 {
-    public partial class Pruebas : Form
+    public partial class frmAnadirUsuario : Form
     {
-        public Pruebas()
+        public frmAnadirUsuario()
         {
             InitializeComponent();
         }

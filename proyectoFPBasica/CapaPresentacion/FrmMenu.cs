@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace CapaPresentacion
 {
-    public partial class Form1 : Form
+    public partial class frmMenu : Form
     {
-        public Form1()
+        public frmMenu()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAñadirUsuario_Click(object sender, EventArgs e)
         {
-            var abrir = new Pruebas();
+            var abrir = new frmAnadirUsuario();
             abrir.ShowDialog();
         }
     }
