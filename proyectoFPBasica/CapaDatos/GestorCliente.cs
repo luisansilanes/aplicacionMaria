@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace CapaDatos
 
         }
 
-        using (MySqlConnection con = new MySqlConnection(CadenaConexion().ToString()))
+      //  using (MySqlConnection con = new MySqlConnection(CadenaConexion().ToString()))
 
 
 

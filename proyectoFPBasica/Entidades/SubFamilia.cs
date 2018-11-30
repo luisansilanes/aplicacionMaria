@@ -8,10 +8,10 @@ namespace Entidades
 {
     public class SubFamilia : IEquatable<SubFamilia>
     {
-        public string idFamilia { get; set; }
-        public string idSubFamilia { get; set; }
-        public string nombre { get; set; }
-        public string descripcion { get; set; }
+        public string IdFamilia { get; set; }
+        public string IdSubFamilia { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
 
         public SubFamilia()
         {
@@ -19,14 +19,14 @@ namespace Entidades
 
         public SubFamilia(string idFamilia, string idSubFamilia)
         {
-            this.idFamilia = idFamilia;
-            this.idSubFamilia = idSubFamilia;
+            this.IdFamilia = idFamilia;
+            this.IdSubFamilia = idSubFamilia;
         }
 
         public SubFamilia(string idFamilia, string idSubFamilia, string nombre, string descripcion) : this(idFamilia, idSubFamilia)
         {
-            this.nombre = nombre;
-            this.descripcion = descripcion;
+            this.Nombre = nombre;
+            this.Descripcion = descripcion;
         }
 
         public override bool Equals(object obj)
@@ -37,15 +37,15 @@ namespace Entidades
         public bool Equals(SubFamilia other)
         {
             return other != null &&
-                   idFamilia == other.idFamilia &&
-                   idSubFamilia == other.idSubFamilia;
+                   IdFamilia == other.IdFamilia &&
+                   IdSubFamilia == other.IdSubFamilia;
         }
 
         public override int GetHashCode()
         {
             var hashCode = -1530756240;
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(idFamilia);
-            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(idSubFamilia);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(IdFamilia);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(IdSubFamilia);
             return hashCode;
         }
     }

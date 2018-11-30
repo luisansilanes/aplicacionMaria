@@ -31,11 +31,11 @@ namespace CapaDatos
                 try
                 {
                     conexion.Open();
-                    string sqlInsertUsuario = "INSERT INTO usuario VALUES(Password,Nombre,Foto) VALUES(@Password,@Nombre,@Foto)";
+                    string sqlInsertUsuario = "INSERT INTO usuario (Password,Nombre,Foto) VALUES(?,?,?)";
                     MySqlCommand cmdInsertUsuario = new MySqlCommand(sqlInsertUsuario,conexion);
-                    cmdInsertUsuario.Parameters.AddWithValue("@Password", usuario.Password);
-                    cmdInsertUsuario.Parameters.AddWithValue("@Nombre", usuario.Nombre);
-                    cmdInsertUsuario.Parameters.AddWithValue("@Foto", usuario.Foto);
+                    cmdInsertUsuario.Parameters.AddWithValue("Password", usuario.Password);
+                    cmdInsertUsuario.Parameters.AddWithValue("Nombre", usuario.Nombre);
+                    cmdInsertUsuario.Parameters.AddWithValue("Foto", usuario.Foto);
                     int resultado = cmdInsertUsuario.ExecuteNonQuery();
                     if (resultado == 0) return "No se ha podido insertar el usuario";
                 } catch(Exception e)
@@ -45,6 +45,25 @@ namespace CapaDatos
             }
                 return "";
         }
+
+        /// <summary>
+        /// Método que recibe un usuario a Borrar. Si sale bien devuelve un String "vacio". Si no, devolverá un mensaje de error.
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns></returns>
+        public String BorrarUsuario(Usuario usuario)
+        {
+            MySqlConnectionStringBuilder builder = this.StringConexion();
+            using (MySqlConnection conexion = new MySqlConnection(builder.ToString()))
+            {
+                string sqlBorrar = "DELETE FROM usuario WHERE Nombre=?";
+                MySqlCommand cmdBorrar = new MySqlCommand(sqlBorrar, conexion);
+                int resultado = cmdBorrar.ExecuteNonQuery();
+                if (resultado == 0) return "No se ha podido borrar el usuario";
+            }
+                return "";
+        }
+
         public List<Usuario> ListaUsuarios()
         {
             MySqlConnectionStringBuilder builder = this.StringConexion();

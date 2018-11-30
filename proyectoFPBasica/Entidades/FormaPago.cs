@@ -8,8 +8,8 @@ namespace Entidades
 {
     public class FormaPago : IEquatable<FormaPago>
     {
-        public int codPago { get; set; }
-        public string tipo { get; set; }
+        public int CodPago { get; set; }
+        public string Tipo { get; set; }
         public List<SubFormaPago> SubFormasPago = new List<SubFormaPago>();
 
         public FormaPago()
@@ -18,12 +18,12 @@ namespace Entidades
 
         public FormaPago(int codPago)
         {
-            this.codPago = codPago;
+            this.CodPago = codPago;
         }
 
         public FormaPago(int codPago, string tipo, List<SubFormaPago> subFormasPago) : this(codPago)
         {
-            this.tipo = tipo;
+            this.Tipo = tipo;
             SubFormasPago = subFormasPago;
         }
 
@@ -35,12 +35,12 @@ namespace Entidades
         public bool Equals(FormaPago other)
         {
             return other != null &&
-                   codPago == other.codPago;
+                   CodPago == other.CodPago;
         }
 
         public override int GetHashCode()
         {
-            return 748314300 + codPago.GetHashCode();
+            return 748314300 + CodPago.GetHashCode();
         }
     }
 }
