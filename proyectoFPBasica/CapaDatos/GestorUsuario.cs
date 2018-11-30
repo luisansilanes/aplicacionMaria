@@ -95,6 +95,12 @@ namespace CapaDatos
             }
             return "";
         }
+        /// <summary>
+        /// Recibe el idUsuario del usuario a modificar, la nuevaFoto. Si sale bien devuelve un String "vacio". Si no, devolverá un mensaje de error.
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="nuevaFoto"></param>
+        /// <returns></returns>
         public String ActualizarFotoUsuario(int idUsuario,string nuevaFoto)
         {
             //AHORA QUE ME VIENE A LA CABEZA, PREGUNTAR DONDE LECHES ESTARÁN LAS FOTOS. Y SI TENEMOS QUE GUARDAR EN EL CAMPO FOTO LA RUTA ENTERA
@@ -119,6 +125,12 @@ namespace CapaDatos
         }
 
         //PREGUNTAR SI ESTO SOLO LO HACE EL ADMIN BUENO ESTO Y CASI TODOS LOS METODOS DE ESTE GESTOR
+        /// <summary>
+        /// Recibe el idUsuario del usuario y la nueva contraseña.Si sale bien devuelve un String "vacio". Si no, devolverá un mensaje de error.
+        /// </summary>
+        /// <param name="idUsuario"></param>
+        /// <param name="nuevaContrasena"></param>
+        /// <returns></returns>
         public String CambiarContrasena(int idUsuario,String nuevaContrasena)
         {
             MySqlConnectionStringBuilder builder = this.StringConexion();
@@ -132,6 +144,10 @@ namespace CapaDatos
 
                 return "";
         }
+        /// <summary>
+        /// Devuelve una lista de Usuarios con todos los usuarios de la base de datos.
+        /// </summary>
+        /// <returns></returns>
         public List<Usuario> ListaUsuarios()
         {
             MySqlConnectionStringBuilder builder = this.StringConexion();
