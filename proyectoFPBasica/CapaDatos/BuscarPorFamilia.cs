@@ -39,6 +39,19 @@ namespace CapaDatos
                     cmdBuscarProductoConIdFamilia.Parameters.AddWithValue("@IdFamilia", nombre);
                     MySqlDataReader drBuscarProductoConIdFamilia = cmdBuscarProductoConIdFamilia.ExecuteReader();
 
+                    List<Producto> listaProducto = new List<Producto>();
+
+                    while (drBuscarProductoConIdFamilia.Read())
+                    {
+                        listaProducto.Add(new Producto(drBuscarProductoConIdFamilia["CodProducto"].ToString(),
+                            drBuscarProductoConIdFamilia["CodBarras"].ToString(), drBuscarProductoConIdFamilia["Descripcion"].ToString(),
+                            int.Parse(drBuscarProductoConIdFamilia["IdMarca"].ToString()),
+                            decimal.Parse(drBuscarProductoConIdFamilia["Precio"].ToString()),
+                            int.Parse(drBuscarProductoConIdFamilia["Stock"].ToString()),
+                            int.Parse(drBuscarProductoConIdFamilia["PesoNeto"].ToString()),
+                            int.Parse(drBuscarProductoConIdFamilia["PesoNuto"].ToString())));
+                    }
+
                     if (!drBuscarIdFamilia.Read()) return null;
 
 
