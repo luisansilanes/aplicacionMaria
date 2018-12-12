@@ -29,8 +29,9 @@ namespace CapaDatos
                     string sqlBuscarIdFamilia = "SELECT IdFamilia From Familia WHERE Nombre = @Nombre";
                     MySqlCommand cmdBuscarIdFamilia = new MySqlCommand(sqlBuscarIdFamilia, conexion);
                     cmdBuscarIdFamilia.Parameters.AddWithValue("@Nombre", nombre);
-                    int resultado = cmdBuscarIdFamilia.ExecuteNonQuery();
-                    if (resultado == 0) return "No se ha podido encontrar la familia...";
+                    MySqlDataReader drBuscarIdFamilia = cmdBuscarIdFamilia.ExecuteReader();
+
+                    if (!drBuscarIdFamilia.Read()) return "No se ha podido encontrar la familia...";
                 }
                 catch (Exception e)
                 {
