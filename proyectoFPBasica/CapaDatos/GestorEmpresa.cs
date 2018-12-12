@@ -14,7 +14,7 @@ namespace CapaDatos
     {
 
         /// <summary>
-        /// Método para añadir una Empresa. Si todo sale bien devuelve un String "vacio". Si no, mostrará un mensaje de error.
+        /// Método para añadir una Empresa. Si todo sale bien devuelve un String "vacio"... Si no, mostrará un mensaje de error.
         /// </summary>
         /// <param name="empresa"></param>
         /// <returns></returns>
