@@ -3,6 +3,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +41,16 @@ namespace CapaDatos
                 }
             }
             return "";
+        }
+
+        private MySqlConnectionStringBuilder StringConexion()
+        {
+            MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
+            builder.UserID = "root";
+            builder.Server = "localhost";
+            builder.Password = "";
+            builder.Database = "almacenespela";
+            return builder;
         }
 
         private void guardarMensajeError(Exception ex)
