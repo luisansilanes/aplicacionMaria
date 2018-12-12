@@ -41,6 +41,7 @@ namespace CapaDatos
                 } catch(Exception e)
                 {
                     this.guardarMensajeError(e);
+                    return "error consulte administración.";
                 }
             }
                 return "";
@@ -66,6 +67,7 @@ namespace CapaDatos
                 catch(Exception e)
                 {
                     this.guardarMensajeError(e);
+                    return "error consulte administración.";
                 }
             }
                 return "";
@@ -91,6 +93,7 @@ namespace CapaDatos
                 } catch (Exception e)
                 {
                     this.guardarMensajeError(e);
+                    return "error consulte administración.";
                 }
             }
             return "";
@@ -119,6 +122,7 @@ namespace CapaDatos
                 catch (Exception e)
                 {
                     this.guardarMensajeError(e);
+                    return "error consulte administración.";
                 }
             }
             return "";
@@ -169,6 +173,7 @@ namespace CapaDatos
                 } catch(Exception e)
                 {
                     this.guardarMensajeError(e);
+                    return null;
                 }
             }
 
